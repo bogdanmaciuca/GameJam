@@ -11,7 +11,7 @@
 
 const int WND_WIDTH = 1024;
 const int WND_HEIGHT = 768;
-const int TILE_SIZE = 32;
+const int TILE_SIZE = 16;
 const int MAP_W = WND_WIDTH / TILE_SIZE;
 const int MAP_H = WND_HEIGHT / TILE_SIZE;
 
@@ -21,6 +21,16 @@ enum {
 	WATER,
 	FIRE
 };
+
+void DrawMap(char **map) {
+	sf::Texture dirt_tex, water_tex, fire_tex;
+	texture.loadFromFile("res/")
+	for (int i = 0; i < MAP_W; i++) {
+		for (int j = 0; j < MAP_H; j++) {
+			sf::
+		}
+	}
+}
 
 int main() {
 	char map[MAP_W][MAP_H];
