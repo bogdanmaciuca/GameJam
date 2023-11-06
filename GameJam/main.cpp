@@ -16,7 +16,7 @@ int main() {
 	CreateMap(map, start_x, start_y);
 
 	sf::RenderWindow window(sf::VideoMode(WND_WIDTH, WND_HEIGHT), "Minesweeper");
-	Player player(start_x, start_y, MAX_MANA);
+	Player player(start_x, start_y);
 
 	window.setFramerateLimit(FPS_LIMIT);
 	unsigned long long ticks = 0;
@@ -31,7 +31,7 @@ int main() {
 		window.clear();
 
 		DrawMap(map, window);
-		player.Update(map, window);
+		player.Update(map, window, ticks);
 		DrawGUI(window, player.GetMana());
 		window.display();
 		ticks++;
