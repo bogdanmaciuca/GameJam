@@ -13,7 +13,7 @@
 int main() {
 	char map[MAP_W + 2][MAP_H + 2];
 	int start_x, start_y; // pozitia initiala a caracterului
-	int timeBetweenFires = 1; // In seconds
+	int timeBetweenFires = 5; // In seconds
 	bool gameOver = false;
 	CreateMap(map, start_x, start_y);
 
@@ -33,7 +33,7 @@ int main() {
 		// Game logic
 		if (ticks % 15 == 0)
 			simpleTiles = UpdateMap(map, 1); // Updates water
-		if (ticks % 5 == 0)
+		if (ticks % 60 == 0)
 			UpdateMap(map, 0); // Updates fire
 		if (ticks != 0 && ticks % (FPS_LIMIT * timeBetweenFires) == 0) { // Spawn new fire
 			int x = rand() % (MAP_W - 20) + 10;
