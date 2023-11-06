@@ -34,22 +34,22 @@ void Player::Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window) {
 			else if (c == 'd')
 				dir_x = +1;
 
-			if (y + dir_y > 0 && y + dir_y < MAP_H + 1) {
+			if (dir_y && y + dir_y > 0 && y + dir_y < MAP_H + 1) {
 				if (map[x][y + dir_y] == WATER)
 					y += dir_y;
 				else if (mana > mana_cost) {
 					y += dir_y;
 					mana -= mana_cost;
-					map[x][y + dir_y] = WATER;
+					map[x][y] = WATER;
 				}
 			}
-			if (x + dir_x > 0 && x + dir_x < MAP_W + 1) {
+			if (dir_x && x + dir_x > 0 && x + dir_x < MAP_W + 1) {
 				if (map[x + dir_x][y] == WATER)
 					x += dir_x;
 				else if (mana > mana_cost) {
 					x += dir_x;
 					mana -= mana_cost;
-					map[x + dir_x][y] = WATER;
+					map[x][y] = WATER;
 				}
 			}
 		}
