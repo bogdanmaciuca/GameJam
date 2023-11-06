@@ -31,18 +31,20 @@ void UpdateMap(char map[MAP_W + 2][MAP_H + 2], bool updateWater) {
 }
 
 void CreateMap(char map[MAP_W + 2][MAP_H + 2],int &x0, int &y0) {
+	srand(time(0));
 	for (int i = 0; i <= MAP_W; i++)
 		for (int j = 0; j <= MAP_H; j++)
 			map[i][j] = -1;
 
 	// Generate dirt
 	for (int i = 1; i < MAP_W + 1; i++)
-		for (int j = 1; j < MAP_H + 1; j++)
-			map[i][j] = (noise2(i / 10.0f, j / 10.0f) > -.25f ? DIRT : EMPTY);
+		for (int j = 1; j < MAP_H + 1; j++) {
+			int offset = rand() % 1000;
+			map[i][j] = noise2((8639 + i) / 10.0f, (8639 + j) / 10.0f) > -.25f ? DIRT : EMPTY;
+		}
 
 	// Generate water
 	int x = 0, y = 0;
-	srand(time(0));
 	do {
 		x = rand() % MAP_W + 1;
 		y = rand() % MAP_H + 1;
