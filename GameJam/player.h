@@ -6,7 +6,7 @@
 class Player{
 public:
 	int GetMana() { return mana; }
-	void Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window);
+	void Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window, int tick);
 	Player(int x, int y, int mana) : x(x), y(y), mana(mana) {
 		player_texture.loadFromFile("res/Contur.png");
 		player_sprite.setTexture(player_texture);
@@ -41,7 +41,8 @@ void Player::Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window, in
 					y += dir_y;
 				else if (mana > mana_cost) {
 					y += dir_y;
-					mana -= mana_cost;
+					if (map[x][y + dir_y] == DIRT || map[x][y + dir_y] == FIRE)
+						mana -= mana_cost;
 					map[x][y] = WATER;
 				}
 			}
@@ -50,7 +51,8 @@ void Player::Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window, in
 					x += dir_x;
 				else if (mana > mana_cost) {
 					x += dir_x;
-					mana -= mana_cost;
+					if (map[x + dir_x][y] == DIRT || map[x + dir_x][y] == FIRE)
+						mana -= mana_cost;
 					map[x][y] = WATER;
 				}
 			}
@@ -60,7 +62,6 @@ void Player::Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window, in
 	}
 	if (tick % mana_timer == 0 && mana < MAX_MANA)
 		mana = std::min(mana + mana_refill, MAX_MANA);
-	std::cout << mana << " ";
 	player_sprite.setPosition(sf::Vector2f(TILE_SIZE * (x - 1), TILE_SIZE * (y - 1)));
 	window.draw(player_sprite);
 }
