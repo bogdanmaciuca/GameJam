@@ -1,3 +1,4 @@
+#pragma once
 
 const int WND_WIDTH = 1024;
 const int WND_HEIGHT = 768;
@@ -10,4 +11,6 @@ enum {
 	DIRT,
 	WATER,
 	FIRE
-}; #pragma once
+};
+
+const int FPS_LIMIT = 30;

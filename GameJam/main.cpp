@@ -8,6 +8,8 @@
 #pragma comment(lib, "sfml-graphics")
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include "util.h"
+#include "game.h"
 
 const int WND_WIDTH = 1024;
 const int WND_HEIGHT = 768;
@@ -22,30 +24,26 @@ enum {
 	FIRE
 };
 
-void DrawMap(char **map) {
-	sf::Texture dirt_tex, water_tex, fire_tex;
-	texture.loadFromFile("res/")
-	for (int i = 0; i < MAP_W; i++) {
-		for (int j = 0; j < MAP_H; j++) {
-			sf::
-		}
-	}
-}
-
 int main() {
-	char map[MAP_W][MAP_H];
+	char map[MAP_W+2][MAP_H+2];
 	sf::Window window(sf::VideoMode(800, 600), "My window");
 	
-	float deltaTime;
+	window.setFramerateLimit(FPS_LIMIT);
+	unsigned long long ticks;
 	while (window.isOpen()) {
 		// check all the window's events that were triggered since the last iteration of the loop
 		sf::Event event;
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed)
 				window.close();
-			window
-			window.display();
 		}
+
+		// Game logic
+		if (ticks % 15 == 0)
+			UpdateMap(map);
+
+		// Render
+		window.display();
 	}
 
 	return 0;
