@@ -1,13 +1,7 @@
-#define SFML_STATIC
 
+#pragma comment(lib, "sfml-graphics")
 #pragma comment(lib, "sfml-window")
 #pragma comment(lib, "sfml-system")
-#pragma comment(lib, "opengl32")
-#pragma comment(lib, "winmm")
-#pragma comment(lib, "gdi32")
-#pragma comment(lib, "sfml-graphics")
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
 #include "util.h"
 #include "game.h"
 #include "render.h"
@@ -17,7 +11,7 @@ int main() {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
 	
 	window.setFramerateLimit(FPS_LIMIT);
-	unsigned long long ticks;
+	unsigned long long ticks = 0;
 	while (window.isOpen()) {
 		// check all the window's events that were triggered since the last iteration of the loop
 		sf::Event event;
@@ -27,12 +21,14 @@ int main() {
 		}
 
 		// Game logic
-		if (ticks % 15 == 0)
+		if (ticks % 30 == 0)
 			UpdateMap(map);
 
 		// Render
+		window.clear();
 		DrawMap(map, window);
 		window.display();
+		ticks++;
 	}
 
 	return 0;

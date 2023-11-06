@@ -1,4 +1,6 @@
 #pragma once
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
 const int WND_WIDTH = 1024;
 const int WND_HEIGHT = 768;

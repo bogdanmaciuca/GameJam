@@ -1,5 +1,4 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "util.h"
 
 void DrawMap(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window) {
