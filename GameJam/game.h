@@ -30,8 +30,7 @@ void UpdateMap(char map[MAP_W + 2][MAP_H + 2], bool updateWater) {
 	}
 }
 
-void CreateMap(char map[MAP_W + 2][MAP_H + 2]) {
-	// For borders
+void CreateMap(char map[MAP_W + 2][MAP_H + 2],int &x0, int &y0) {
 	for (int i = 0; i <= MAP_W; i++)
 		for (int j = 0; j <= MAP_H; j++)
 			map[i][j] = -1;

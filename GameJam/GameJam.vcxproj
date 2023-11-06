@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="game.h" />
     <ClInclude Include="render.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="vendor\noise1234.h" />
   </ItemGroup>
