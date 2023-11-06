@@ -23,11 +23,10 @@ void DrawGUI(sf::RenderWindow &window) {
 int main() {
 	char map[MAP_W + 2][MAP_H + 2];
 	int start_x, start_y; //pozitia initiala a caracterului
-	int max_mana = 10;
 	CreateMap(map, start_x, start_y);
 
 	sf::RenderWindow window(sf::VideoMode(WND_WIDTH, WND_HEIGHT), "Minesweeper");
-	Player player(start_x, start_y, max_mana);
+	Player player(start_x, start_y);
 
 	window.setFramerateLimit(FPS_LIMIT);
 	unsigned long long ticks = 0;
@@ -42,7 +41,7 @@ int main() {
 		window.clear();
 
 		DrawMap(map, window);
-		player.Update(map, window);
+		player.Update(map, window, ticks);
 		DrawGUI(window);
 		window.display();
 		ticks++;

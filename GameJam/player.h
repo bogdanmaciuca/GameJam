@@ -5,19 +5,19 @@
 
 class Player{
 public:
-	void Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window);
-	Player(int x, int y, int mana) : x(x), y(y), mana(mana) {
+	void Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window, int tick);
+	Player(int x, int y) : x(x), y(y), mana(mana) {
 		player_texture.loadFromFile("res/Contur.png");
 		player_sprite.setTexture(player_texture);
 	};
 private:
 	int x, y;
-	int mana, mana_refill = 0, mana_cost = 1;
+	int mana = MAX_MANA, mana_refill = 1, mana_cost = 1, mana_timer = 10;
 	sf::Sprite player_sprite;
 	sf::Texture player_texture;
 };
 
-void Player::Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window) {
+void Player::Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window, int tick) {
 	sf::Event event;
 	while (window.pollEvent(event)) {
 		if (event.type == sf::Event::TextEntered) {
@@ -56,6 +56,8 @@ void Player::Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window) {
 		else if (event.type == sf::Event::Closed)
 			window.close();
 	}
+	if (tick % mana_timer == 0 && mana < MAX_MANA)
+		mana = std::min(mana, MAX_MANA);
 	player_sprite.setPosition(sf::Vector2f(TILE_SIZE * (x - 1), TILE_SIZE * (y - 1)));
 	window.draw(player_sprite);
 }
