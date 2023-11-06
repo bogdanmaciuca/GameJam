@@ -23,7 +23,7 @@ void UpdateMap(char map[MAP_W + 2][MAP_H + 2]) {
 	}
 }
 
-void CreateMap(char map[MAP_W + 2][MAP_H + 2]) {
+void CreateMap(char map[MAP_W + 2][MAP_H + 2],int &x0, int &y0) {
 	for (int i = 0; i <= MAP_W; i++)
 		for (int j = 0; j <= MAP_H; j++)
 			map[i][j] = -1;
@@ -40,5 +40,6 @@ void CreateMap(char map[MAP_W + 2][MAP_H + 2]) {
 		waterStartY = rand() % MAP_H + 1;
 	} while (map[waterStartX][waterStartY] != EMPTY);
 	map[waterStartX][waterStartY] = WATER;
-
+	x0 = waterStartX;
+	y0 = waterStartY;
 }
