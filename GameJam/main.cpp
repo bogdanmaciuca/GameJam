@@ -10,16 +10,16 @@
 extern "C" {
 #include "vendor/noise1234.h"
 }
+#include <iostream>
 
 int main() {
 	char map[MAP_W+2][MAP_H+2];
-	for (int i = 1; i < MAP_W + 1; i++)
-		for (int j = 1; j < MAP_H + 1; j++)
-			map[i][j] = EMPTY;
+	for (int i = 0; i <= MAP_W; i++)
+		for (int j = 0; j <= MAP_H; j++)
+			map[i][j] = -1;
 
-	// Generate dirt
-	for (int i = 1; i < MAP_W + 1; i++)
-		for (int j = 1; j < MAP_H + 1; j++)
+	for (int i = 1; i < MAP_W; i++)
+		for (int j = 1; j < MAP_H; j++)
 			map[i][j] = (noise2(i/10.0f, j / 10.0f) > -.25f ? DIRT : EMPTY);
 
 	// Generate water
@@ -55,6 +55,8 @@ int main() {
 		window.display();
 		ticks++;
 	}
+	
+		
 
 	return 0;
 }
