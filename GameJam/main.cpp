@@ -5,15 +5,14 @@
 #pragma comment(lib, "opengl32")
 #pragma comment(lib, "winmm")
 #pragma comment(lib, "gdi32")
+#pragma comment(lib, "sfml-graphics")
 #include <SFML/Window.hpp>
 
 int main()
 {
 	sf::Window window(sf::VideoMode(800, 600), "My window");
 	///test
-	//twsrew
-	// sdsadadaf
-	// sdadf
+	//ana are mere
 	// run the program as long as the window is open
 	while (window.isOpen())
 	{
@@ -24,6 +23,7 @@ int main()
 			// "close requested" event: we close the window
 			if (event.type == sf::Event::Closed)
 				window.close();
+			window.display();
 		}
 	}
 
