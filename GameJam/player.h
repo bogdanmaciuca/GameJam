@@ -6,15 +6,17 @@
 class Player{
 public:
 	int GetMana() { return mana; }
+	int water_tiles;
 	void Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window, int tick);
 	Player(int x, int y, int mana) : x(x), y(y), mana(mana) {
 		player_texture.loadFromFile("res/Contur.png");
 		player_sprite.setTexture(player_texture);
 		mana = MAX_MANA;
+		water_tiles = 1;
 	};
 private:
 	int x, y;
-	int mana, mana_refill = 1, mana_cost = 1, mana_timer = 20;
+	int mana, mana_refill = 1, mana_cost = 1, mana_timer = 20, mana_refill_rate = 40;
 	sf::Sprite player_sprite;
 	sf::Texture player_texture;
 };
@@ -60,10 +62,12 @@ void Player::Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window, in
 		else if (event.type == sf::Event::Closed)
 			window.close();
 	}
+	mana_refill = std::max(1, water_tiles / mana_refill_rate);
 	if (tick % mana_timer == 0 && mana < MAX_MANA)
 		mana = std::min(mana + mana_refill, MAX_MANA);
 	player_sprite.setPosition(sf::Vector2f(TILE_SIZE * (x - 1), TILE_SIZE * (y - 1)));
 	window.draw(player_sprite);
+	std::cout << mana_refill << " ";
 }
 
 

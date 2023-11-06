@@ -9,10 +9,10 @@ extern "C" {
 
 char _oldMap[MAP_W + 2][MAP_H + 2];
 // Returns number of dirt/empty tiles
-int UpdateMap(char map[MAP_W + 2][MAP_H + 2], bool updateWater) {
+int UpdateMap(char map[MAP_W + 2][MAP_H + 2], bool updateWater, int &water_tiles) {
 	int simple_tiles = 0;
-	for (int i = 1; i < MAP_W + 1; i++) {
-		for (int j = 1; j < MAP_H + 1; j++) {
+	for (int i = 0; i <= MAP_W + 1; i++) {
+		for (int j = 0; j <= MAP_H + 1; j++) {
 			_oldMap[i][j] = map[i][j];
 			if (map[i][j] == DIRT || map[i][j] == EMPTY)
 				simple_tiles++;
@@ -24,8 +24,10 @@ int UpdateMap(char map[MAP_W + 2][MAP_H + 2], bool updateWater) {
 			if (_oldMap[i][j] == (updateWater ? WATER : FIRE)) {
 				for (int k = 0; k < 4; k++) {
 					if (updateWater) {
-						if (_oldMap[i + kernel[k].x][j + kernel[k].y] == EMPTY)
+						if (_oldMap[i + kernel[k].x][j + kernel[k].y] == EMPTY && map[i + kernel[k].x][j + kernel[k].y]!=WATER) { //treceai de mai multe ori prin acelasi patrat
+							water_tiles++;
 							map[i + kernel[k].x][j + kernel[k].y] = WATER;
+						}
 					}
 					else {
 						bool update = (rand() % 10) > 3;
@@ -52,13 +54,12 @@ bool isPrime(int n)
 }
 
 void CreateMap(char map[MAP_W + 2][MAP_H + 2],int &x0, int &y0) {
-	for (int i = 0; i <= MAP_W; i++)
-		for (int j = 0; j <= MAP_H; j++)
+	for (int i = 0; i <= MAP_W+1; i++)
+		for (int j = 0; j <= MAP_H + 1; j++)
 			map[i][j] = -1;
 
 	srand(time(NULL));
 	int rand_seed = 150+rand()%30;
-	std::cout << rand_seed;
 	// Generate dirt
 	for (int i = 1; i < MAP_W + 1; i++)
 		for (int j = 1; j < MAP_H + 1; j++) 
