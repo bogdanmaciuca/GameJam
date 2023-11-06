@@ -25,7 +25,18 @@ int main() {
 	gameOverSprite.setPosition(0, 0);
 	gameOverSprite.setScale(1.0f / gameOverTex.getSize().x * WND_WIDTH, 1.0f / gameOverTex.getSize().y * WND_HEIGHT);
 	gameOverSprite.setTexture(gameOverTex);
+	sf::Texture splashScreenTex;
+	splashScreenTex.loadFromFile("res/splashscreen.png");
+	sf::Sprite splashScreenSprite;
+	splashScreenSprite.setPosition(0, 0);
+	splashScreenSprite.setScale(1.0f / splashScreenTex.getSize().x * WND_WIDTH, 1.0f / splashScreenTex.getSize().y * WND_HEIGHT);
+	splashScreenSprite.setTexture(splashScreenTex);
 
+	window.draw(splashScreenSprite);
+	window.display();
+	while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+		player.Update(map, window, 0);
+	
 	window.setFramerateLimit(FPS_LIMIT);
 	unsigned long long ticks = 0;
 	while (window.isOpen()) {
