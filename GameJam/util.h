@@ -16,3 +16,4 @@ enum {
 };
 
 const int FPS_LIMIT = 30;
+const int MAX_MANA = 10;

@@ -5,8 +5,9 @@
 
 class Player{
 public:
-	void Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window, int tick);
-	Player(int x, int y) : x(x), y(y), mana(mana) {
+	int GetMana() { return mana; }
+	void Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window);
+	Player(int x, int y, int mana) : x(x), y(y), mana(mana) {
 		player_texture.loadFromFile("res/Contur.png");
 		player_sprite.setTexture(player_texture);
 		mana = MAX_MANA;
