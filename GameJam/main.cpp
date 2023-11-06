@@ -11,6 +11,7 @@ int main()
 {
 	sf::Window window(sf::VideoMode(800, 600), "My window");
 	///test
+	//twsrew
 	// run the program as long as the window is open
 	while (window.isOpen())
 	{
