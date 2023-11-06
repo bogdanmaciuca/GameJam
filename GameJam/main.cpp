@@ -43,9 +43,9 @@ int main() {
 		int simpleTiles;
 		// Game logic
 		if (ticks % 15 == 0)
-			simpleTiles = UpdateMap(map, 1); // Updates water
+			simpleTiles = UpdateMap(map, 1, player.water_tiles); // Updates water
 		if (ticks % 60 == 0)
-			UpdateMap(map, 0); // Updates fire
+			UpdateMap(map, 0, player.water_tiles); // Updates fire
 		if (ticks != 0 && ticks % (FPS_LIMIT * timeBetweenFires) == 0) { // Spawn new fire
 			int x = rand() % (MAP_W - 20) + 10;
 			int y = rand() % (MAP_H - 20) + 10;
