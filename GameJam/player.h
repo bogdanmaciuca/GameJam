@@ -14,7 +14,7 @@ public:
 	};
 private:
 	int x, y;
-	int mana, mana_refill = 1, mana_cost = 1, mana_timer = 10;
+	int mana, mana_refill = 1, mana_cost = 1, mana_timer = 20;
 	sf::Sprite player_sprite;
 	sf::Texture player_texture;
 };
