@@ -8,10 +8,10 @@
 #pragma comment(lib, "sfml-graphics")
 #include <SFML/Window.hpp>
 
-int main()
-{
+int main() {
 	sf::Window window(sf::VideoMode(800, 600), "My window");
 	///test
+	// shit fuck asfas
 	//ana are mere
 	// run the program as long as the window is open
 	while (window.isOpen())
