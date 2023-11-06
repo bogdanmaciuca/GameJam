@@ -11,7 +11,7 @@
 
 const int WND_WIDTH = 1024;
 const int WND_HEIGHT = 768;
-const int TILE_SIZE = 16;
+const int TILE_SIZE = 32;
 const int MAP_W = WND_WIDTH / TILE_SIZE;
 const int MAP_H = WND_HEIGHT / TILE_SIZE;
 
@@ -22,27 +22,18 @@ enum {
 	FIRE
 };
 
-void DrawMap(char **map) {
-	sf::Texture dirt_tex, water_tex, fire_tex;
-	texture.loadFromFile("res/")
-	for (int i = 0; i < MAP_W; i++) {
-		for (int j = 0; j < MAP_H; j++) {
-			sf::
-		}
-	}
-}
-
 int main() {
-	char map[TILE_NUM_X][TILE_NUM_Y];
+	char map[MAP_W][MAP_H];
 	sf::Window window(sf::VideoMode(800, 600), "My window");
+	
+	float deltaTime;
 	while (window.isOpen()) {
 		// check all the window's events that were triggered since the last iteration of the loop
 		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			// "close requested" event: we close the window
+		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed)
 				window.close();
+			window
 			window.display();
 		}
 	}
