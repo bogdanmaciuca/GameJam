@@ -14,17 +14,22 @@ void DrawMap(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window) {
 	*/
 
 	sf::RectangleShape tile({ TILE_SIZE, TILE_SIZE });
-	sf::Color colors[5] = { { 80, 80, 80 }, sf::Color::Green, sf::Color::Blue, sf::Color::Red ,{ 139, 69, 19 } };
+	sf::Texture textures[5];
+	textures[0].loadFromFile("res/stone.png");
+	textures[1].loadFromFile("res/grass.png");
+	textures[2].loadFromFile("res/water.png");
+	textures[3].loadFromFile("res/lava.png");
+	textures[4].loadFromFile("res/dirt.png");
 
 	for (int i = 1; i <= MAP_W; i++) {
 		for (int j = 1; j <= MAP_H; j++) {
 			if (map[i][j] != DIRT)
-				tile.setFillColor(colors[map[i][j]]);
+				tile.setTexture(&textures[map[i][j]]);
 			else if ((map[i - 1][j] != DIRT || map[i + 1][j] != DIRT || map[i][j - 1] != DIRT || map[i][j + 1] != DIRT)
 				&& (map[i - 1][j] != FIRE || map[i + 1][j] != FIRE || map[i][j - 1] != FIRE || map[i][j + 1] != FIRE))
-				tile.setFillColor(colors[4]);
+				tile.setTexture(&textures[4]);
 			else
-				tile.setFillColor(colors[map[i][j]]);
+				tile.setTexture(&textures[map[i][j]]);
 			tile.setPosition(sf::Vector2f((i - 1) * TILE_SIZE, (j - 1) * TILE_SIZE));
 			window.draw(tile);
 		}

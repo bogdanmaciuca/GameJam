@@ -1,6 +1,8 @@
 #pragma once
 #include "util.h"
+#include <iostream>
 #include <SFML/Window.hpp>
+#include <random>
 extern "C" {
 #include "vendor/noise1234.h"
 }
@@ -37,16 +39,30 @@ int UpdateMap(char map[MAP_W + 2][MAP_H + 2], bool updateWater) {
 	return simple_tiles;
 }
 
+bool isPrime(int n)
+{
+	if (n <= 1)
+		return false;
+
+	for (int i = 2; i <= n / 2; i++)
+		if (n % i == 0)
+			return false;
+
+	return true;
+}
+
 void CreateMap(char map[MAP_W + 2][MAP_H + 2],int &x0, int &y0) {
-	srand((time(0) % 25728) * (time(0) % 81232));
 	for (int i = 0; i <= MAP_W; i++)
 		for (int j = 0; j <= MAP_H; j++)
 			map[i][j] = -1;
-	float seed_noise = ((rand() % 10000) + (rand() % 10000))/1000.0f;
+
+	srand(time(NULL));
+	int rand_seed = 150+rand()%30;
+	std::cout << rand_seed;
 	// Generate dirt
 	for (int i = 1; i < MAP_W + 1; i++)
-		for (int j = 1; j < MAP_H + 1; j++)
-			map[i][j] = noise2((i) / seed_noise, (j) / seed_noise) > -0.18 ? DIRT : EMPTY;
+		for (int j = 1; j < MAP_H + 1; j++) 
+			map[i][j] = noise2((float)(i * 10) / (rand_seed %100), (float)(j * 10) / (rand_seed % 100)) > -0.185 ? DIRT : EMPTY;
 
 	// Generate water
 	int x = 0, y = 0;
