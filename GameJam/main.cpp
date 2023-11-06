@@ -18,16 +18,15 @@ int main() {
 		for (int j = 0; j <= MAP_H; j++)
 			map[i][j] = -1;
 
-	for (int i = 1; i < MAP_W; i++)
-		for (int j = 1; j < MAP_H; j++)
+	for (int i = 1; i < MAP_W+1; i++)
+		for (int j = 1; j < MAP_H+1; j++)
 			map[i][j] = (noise2(i/10.0f, j / 10.0f) > -.25f ? DIRT : EMPTY);
 
 	// Generate water
 	int waterStartX = 0, waterStartY = 0;
 
-	sf::Clock start;
+	srand(time(0));
 	do {
-		srand(start.getElapsedTime().asMicroseconds());
 		waterStartX = rand() % MAP_W + 1;
 		waterStartY = rand() % MAP_H + 1;
 	} while (map[waterStartX][waterStartY] != EMPTY);

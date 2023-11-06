@@ -14,7 +14,7 @@ void DrawMap(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window) {
 	*/
 
 	sf::RectangleShape tile({ TILE_SIZE, TILE_SIZE });
-	sf::Color colors[5] = { sf::Color::Black, sf::Color::Green, sf::Color::Red,sf::Color::Blue ,{139, 69, 19} };
+	sf::Color colors[5] = { sf::Color::Black, sf::Color::Green, sf::Color::Blue, sf::Color::Red ,{139, 69, 19} };
 
 	for (int i = 1; i <= MAP_W; i++) {
 		for (int j = 1; j <= MAP_H; j++) {
