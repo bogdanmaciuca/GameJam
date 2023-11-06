@@ -13,13 +13,18 @@ void DrawMap(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window) {
 	fire_tex.loadFromFile("res/");
 	*/
 
-	static sf::RectangleShape tile({ TILE_SIZE, TILE_SIZE });
-	static sf::Color colors[4] = { sf::Color::Black, sf::Color::Green, sf::Color::Blue, sf::Color::Red };
+	sf::RectangleShape tile({ TILE_SIZE, TILE_SIZE });
+	sf::Color colors[5] = { sf::Color::Black, sf::Color::Green, sf::Color::Red,sf::Color::Blue ,{139, 69, 19} };
 
-	for (int i = 1; i < MAP_W+1; i++) {
-		for (int j = 1; j < MAP_H+1; j++) {
-			tile.setFillColor(colors[map[i][j]]);
-			tile.setPosition(sf::Vector2f((i-1) * TILE_SIZE, (j-1) * TILE_SIZE));
+	for (int i = 1; i <= MAP_W; i++) {
+		for (int j = 1; j <= MAP_H; j++) {
+			if (map[i][j] != DIRT)
+				tile.setFillColor(colors[map[i][j]]);
+			else if (map[i - 1][j] != DIRT || map[i + 1][j] != DIRT || map[i][j - 1] != DIRT || map[i][j + 1] != DIRT)
+				tile.setFillColor(colors[4]);
+			else
+				tile.setFillColor(colors[map[i][j]]);
+			tile.setPosition(sf::Vector2f((i - 1) * TILE_SIZE, (j - 1) * TILE_SIZE));
 			window.draw(tile);
 		}
 	}
