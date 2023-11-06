@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "util.h"
 
-void DrawMap(char** map, sf::RenderWindow& window) {
+void DrawMap(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window) {
 
 	/*
 	sf::Texture dirt_tex[4], water_tex, fire_tex;
@@ -27,7 +27,7 @@ void DrawMap(char** map, sf::RenderWindow& window) {
 				else
 					tile.setFillColor(colors[map[i][j]]);
 			}
-			tile.setPosition({ i * TILE_SIZE, j * TILE_SIZE });
+			tile.setPosition(sf::Vector2f(i * TILE_SIZE, j * TILE_SIZE));
 			window.draw(tile);
 		}
 	}

@@ -10,23 +10,11 @@
 #include <SFML/Graphics.hpp>
 #include "util.h"
 #include "game.h"
-
-const int WND_WIDTH = 1024;
-const int WND_HEIGHT = 768;
-const int TILE_SIZE = 16;
-const int MAP_W = WND_WIDTH / TILE_SIZE;
-const int MAP_H = WND_HEIGHT / TILE_SIZE;
-
-enum {
-	EMPTY,
-	DIRT,
-	WATER,
-	FIRE
-};
+#include "render.h"
 
 int main() {
 	char map[MAP_W+2][MAP_H+2];
-	sf::Window window(sf::VideoMode(800, 600), "My window");
+	sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
 	
 	window.setFramerateLimit(FPS_LIMIT);
 	unsigned long long ticks;
@@ -43,6 +31,7 @@ int main() {
 			UpdateMap(map);
 
 		// Render
+		DrawMap(map, window);
 		window.display();
 	}
 
