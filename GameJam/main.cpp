@@ -9,6 +9,16 @@
 #include <iostream>
 #include <iostream>
 
+void DrawGUI(sf::RenderWindow &window) {
+	sf::RectangleShape outter({ 220, 60 }), inner({200, 40});
+	outter.setFillColor({ 145, 145, 145, 200});
+	inner.setFillColor({ 0, 23, 153, 200 });
+	outter.setPosition({ 20, 20 });
+	inner.setPosition({ 30, 30 });
+	window.draw(outter);
+	window.draw(inner);
+}
+
 int main() {
 	char map[MAP_W+2][MAP_H+2];
 	CreateMap(map);
@@ -26,17 +36,18 @@ int main() {
 		}
 
 		// Game logic
-		if (ticks % 30 == 0)
-			UpdateMap(map);
+		if (ticks % 15 == 0)
+			UpdateMap(map, 1); // Updates water
+		if (ticks % 60 == 0)
+			UpdateMap(map, 0); // Updates fire
 
 		// Render
 		window.clear();
 		DrawMap(map, window);
+		DrawGUI(window);
 		window.display();
 		ticks++;
 	}
-	
-		
 
 	return 0;
 }
