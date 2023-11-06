@@ -40,6 +40,7 @@ int main() {
 
 		// Render
 		window.clear();
+
 		DrawMap(map, window);
 		player.Update(map, window);
 		DrawGUI(window);

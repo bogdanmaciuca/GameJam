@@ -7,8 +7,7 @@ class Player{
 public:
 	void Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window);
 	Player(int x, int y, int mana) : x(x), y(y), mana(mana) {
-		if (!player_texture.loadFromFile("res/Contur.png"))
-			std::cout << "0";
+		player_texture.loadFromFile("res/Contur.png");
 		player_sprite.setTexture(player_texture);
 	};
 private:
@@ -20,13 +19,11 @@ private:
 
 void Player::Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window) {
 	sf::Event event;
-	while (window.pollEvent(event))
+	while (window.pollEvent(event)) {
 		if (event.type == sf::Event::TextEntered) {
 			char c = 0;
 			if (event.text.unicode < 128)
 				c = static_cast<char>(event.text.unicode);
-			if (c)
-				std::cout << c;
 			int dir_x = 0, dir_y = 0;
 			if (c == 'w')
 				dir_y = -1;
@@ -43,7 +40,7 @@ void Player::Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window) {
 				else if (mana > mana_cost) {
 					y += dir_y;
 					mana -= mana_cost;
-					map[x][y + dir_y] == WATER;
+					map[x][y + dir_y] = WATER;
 				}
 			}
 			if (x + dir_x > 0 && x + dir_x < MAP_W + 1) {
@@ -52,12 +49,13 @@ void Player::Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window) {
 				else if (mana > mana_cost) {
 					x += dir_x;
 					mana -= mana_cost;
-					map[x + dir_x][y] == WATER;
+					map[x + dir_x][y] = WATER;
 				}
 			}
 		}
 		else if (event.type == sf::Event::Closed)
 			window.close();
+	}
 	player_sprite.setPosition(sf::Vector2f(TILE_SIZE * (x - 1), TILE_SIZE * (y - 1)));
 	window.draw(player_sprite);
 }

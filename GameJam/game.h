@@ -48,6 +48,8 @@ void CreateMap(char map[MAP_W + 2][MAP_H + 2],int &x0, int &y0) {
 		y = rand() % MAP_H + 1;
 	} while (map[x][y] != EMPTY);
 	map[x][y] = WATER;
+	y0 = x;
+	x0 = y;
 
 	// Generate fire
 	x = rand() % (MAP_W - 10) + 5;
