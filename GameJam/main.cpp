@@ -10,24 +10,13 @@
 #include <iostream>
 #include "player.h"
 
-void DrawGUI(sf::RenderWindow &window) {
-	sf::RectangleShape outter({ 220, 60 }), inner({200, 40});
-	outter.setFillColor({ 145, 145, 145, 200});
-	inner.setFillColor({ 0, 23, 153, 200 });
-	outter.setPosition({ 20, 20 });
-	inner.setPosition({ 30, 30 });
-	window.draw(outter);
-	window.draw(inner);
-}
-
 int main() {
 	char map[MAP_W + 2][MAP_H + 2];
 	int start_x, start_y; //pozitia initiala a caracterului
-	int max_mana = 10;
 	CreateMap(map, start_x, start_y);
 
 	sf::RenderWindow window(sf::VideoMode(WND_WIDTH, WND_HEIGHT), "Minesweeper");
-	Player player(start_x, start_y, max_mana);
+	Player player(start_x, start_y, MAX_MANA);
 
 	window.setFramerateLimit(FPS_LIMIT);
 	unsigned long long ticks = 0;
@@ -43,7 +32,7 @@ int main() {
 
 		DrawMap(map, window);
 		player.Update(map, window);
-		DrawGUI(window);
+		DrawGUI(window, player.GetMana());
 		window.display();
 		ticks++;
 	}

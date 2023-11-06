@@ -5,6 +5,7 @@
 
 class Player{
 public:
+	int GetMana() { return mana; }
 	void Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window);
 	Player(int x, int y, int mana) : x(x), y(y), mana(mana) {
 		player_texture.loadFromFile("res/Contur.png");
