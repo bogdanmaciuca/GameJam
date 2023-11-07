@@ -47,9 +47,9 @@ void DrawGUI(sf::RenderWindow& window, int mana, int simpleTiles) {
 		sf::RectangleShape inner({ (float)width, (float)height });
 		sf::RectangleShape active({ (float)width * (simpleTiles - 200) / (MAP_W*MAP_H - 200), (float)height});
 		
-		outter.setFillColor({ 145, 145, 145, 200 });
+		outter.setFillColor({ 145, 145, 145, 120 });
 		inner.setFillColor({ 170, 0, 0, 120});
-		active.setFillColor({ 200, 0, 0, 160});
+		active.setFillColor({ 200, 0, 0, 120 });
 		outter.setPosition({ (float)width + 60, 20.0f });
 		inner.setPosition({ (float)width + 70, 30.0f });
 		active.setPosition({ (float)width + 70, 30.0f });
