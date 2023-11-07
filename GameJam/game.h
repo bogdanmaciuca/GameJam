@@ -76,7 +76,9 @@ void CreateMap(char map[MAP_W + 2][MAP_H + 2],int &x0, int &y0) {
 	y0 = y;
 
 	// Generate fire
-	x = rand() % (MAP_W - 20) + 10;
-	y = rand() % (MAP_H - 20) + 10;
+	do {
+		x = rand() % (MAP_W - 20) + 10;
+		y = rand() % (MAP_H - 20) + 10;
+	} while (map[x][y] == WATER);
 	map[x][y] = FIRE;
 }

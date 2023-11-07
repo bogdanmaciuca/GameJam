@@ -13,13 +13,18 @@ void DrawMap(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window) {
 	fire_tex.loadFromFile("res/");
 	*/
 
-	sf::RectangleShape tile({ TILE_SIZE, TILE_SIZE });
-	sf::Texture textures[5];
-	textures[0].loadFromFile("res/stone.png");
-	textures[1].loadFromFile("res/grass.png");
-	textures[2].loadFromFile("res/water.png");
-	textures[3].loadFromFile("res/lava.png");
-	textures[4].loadFromFile("res/dirt.png");
+	static sf::RectangleShape tile({ TILE_SIZE, TILE_SIZE });
+	static sf::Texture textures[5];
+	static bool init = 0;
+	if (!init) {
+		textures[0].loadFromFile("res/stone.png");
+		textures[1].loadFromFile("res/grass.png");
+		textures[2].loadFromFile("res/water.png");
+		textures[3].loadFromFile("res/lava.png");
+		textures[4].loadFromFile("res/dirt.png");
+		init = 1;
+	}
+	
 
 	for (int i = 1; i <= MAP_W; i++) {
 		for (int j = 1; j <= MAP_H; j++) {
@@ -43,9 +48,9 @@ void DrawGUI(sf::RenderWindow& window, int mana, int simpleTiles) {
 		sf::RectangleShape inner({ (float)width, (float)height });
 		sf::RectangleShape active({ (float)width * mana / MAX_MANA, (float)height });
 
-		outter.setFillColor({ 145, 145, 145, 200 });
-		inner.setFillColor({ 0, 23, 153, 180 });
-		active.setFillColor({ 0, 15, 140, 180 });
+		outter.setFillColor({ 145, 145, 145, 120 });
+		inner.setFillColor({ 0, 23, 153, 120 });
+		active.setFillColor({ 0, 15, 140, 120 });
 		outter.setPosition({ 20, 20 });
 		inner.setPosition({ 30, 30 });
 		active.setPosition({ 30, 30 });
@@ -58,9 +63,9 @@ void DrawGUI(sf::RenderWindow& window, int mana, int simpleTiles) {
 		sf::RectangleShape inner({ (float)width, (float)height });
 		sf::RectangleShape active({ (float)width * simpleTiles / (MAP_W*MAP_H - 200), (float)height});
 		
-		outter.setFillColor({ 145, 145, 145, 200 });
-		inner.setFillColor({ 170, 0, 0, 160 });
-		active.setFillColor({ 220, 0, 0, 180 });
+		outter.setFillColor({ 145, 145, 145, 120 });
+		inner.setFillColor({ 170, 0, 0, 120 });
+		active.setFillColor({ 220, 0, 0, 120 });
 		outter.setPosition({ (float)width + 60, 20.0f });
 		inner.setPosition({ (float)width + 70, 30.0f });
 		active.setPosition({ (float)width + 70, 30.0f });
