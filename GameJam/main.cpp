@@ -13,7 +13,7 @@
 int main() {
 	char map[MAP_W + 2][MAP_H + 2];
 	int start_x, start_y; // pozitia initiala a caracterului
-	int timeBetweenFires = 5; // In seconds
+	int timeBetweenFires = 7; // In seconds
 	bool gameOver = false;
 	CreateMap(map, start_x, start_y);
 
@@ -31,11 +31,21 @@ int main() {
 	splashScreenSprite.setPosition(0, 0);
 	splashScreenSprite.setScale(1.0f / splashScreenTex.getSize().x * WND_WIDTH, 1.0f / splashScreenTex.getSize().y * WND_HEIGHT);
 	splashScreenSprite.setTexture(splashScreenTex);
+	sf::Texture tutorial_tex;
+	tutorial_tex.loadFromFile("res/explicatii.png");
+	sf::Sprite tutorialSprite;
+	tutorialSprite.setPosition(0, 0);
+	tutorialSprite.setScale(1.0f / splashScreenTex.getSize().x * WND_WIDTH, 1.0f / splashScreenTex.getSize().y * WND_HEIGHT);
+	tutorialSprite.setTexture(tutorial_tex);
 
 	window.draw(splashScreenSprite);
 	window.display();
-	while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-		player.Update(map, window, 0);
+	while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Enter));
+	window.draw(tutorialSprite);
+	window.display();
+	sf::sleep(sf::seconds(1));
+	while (!sf::Keyboard::isKeyPressed(sf::Keyboard::Enter));
+	player.Update(map, window, 0);
 	
 	window.setFramerateLimit(FPS_LIMIT);
 	unsigned long long ticks = 0;
@@ -66,9 +76,19 @@ int main() {
 		// Render
 		window.clear();
 		DrawMap(map, window);
-		player.Update(map, window, ticks);
+		if(!gameOver)
+			player.Update(map, window, ticks);
 		DrawGUI(window, player.GetMana(), simpleTiles);
-		if (gameOver) window.draw(gameOverSprite);
+		if (gameOver) {
+			window.draw(gameOverSprite);
+			static sf::Font font;
+			font.loadFromFile("res/C64_Pro_Mono-STYLE.ttf");
+			static sf::Text score;
+			score.setFont(font);
+			score.setString("Your score was: " + std::to_string(player.score/1000));
+			score.setPosition(sf::Vector2f(WND_WIDTH - 840, WND_HEIGHT - 140));
+			window.draw(score);
+		}
 		window.display();
 		ticks++;
 	}

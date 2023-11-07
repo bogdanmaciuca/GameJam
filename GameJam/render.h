@@ -32,9 +32,9 @@ void DrawGUI(sf::RenderWindow& window, int mana, int simpleTiles) {
 		sf::RectangleShape inner({ (float)width, (float)height });
 		sf::RectangleShape active({ (float)width * mana / MAX_MANA, (float)height });
 
-		outter.setFillColor({ 145, 145, 145, 200 });
-		inner.setFillColor({ 0, 23, 153, 180 });
-		active.setFillColor({ 0, 15, 140, 180 });
+		outter.setFillColor({ 145, 145, 145, 120 });
+		inner.setFillColor({ 0, 23, 153, 120 });
+		active.setFillColor({ 0, 15, 140, 120 });
 		outter.setPosition({ 20, 20 });
 		inner.setPosition({ 30, 30 });
 		active.setPosition({ 30, 30 });
