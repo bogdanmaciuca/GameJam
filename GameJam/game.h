@@ -41,18 +41,6 @@ int UpdateMap(char map[MAP_W + 2][MAP_H + 2], bool updateWater, int &water_tiles
 	return simple_tiles;
 }
 
-bool isPrime(int n)
-{
-	if (n <= 1)
-		return false;
-
-	for (int i = 2; i <= n / 2; i++)
-		if (n % i == 0)
-			return false;
-
-	return true;
-}
-
 void CreateMap(char map[MAP_W + 2][MAP_H + 2],int &x0, int &y0) {
 	for (int i = 0; i <= MAP_W+1; i++)
 		for (int j = 0; j <= MAP_H + 1; j++)
