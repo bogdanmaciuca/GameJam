@@ -13,7 +13,7 @@
 int main() {
 	char map[MAP_W + 2][MAP_H + 2];
 	int start_x, start_y; // pozitia initiala a caracterului
-	int timeBetweenFires = 7; // In seconds
+	int timeBetweenFires = 10; // In seconds
 	bool gameOver = false;
 	CreateMap(map, start_x, start_y);
 
@@ -37,6 +37,9 @@ int main() {
 	tutorialSprite.setPosition(0, 0);
 	tutorialSprite.setScale(1.0f / splashScreenTex.getSize().x * WND_WIDTH, 1.0f / splashScreenTex.getSize().y * WND_HEIGHT);
 	tutorialSprite.setTexture(tutorial_tex);
+	sf::Font font;
+	font.loadFromFile("res/C64_Pro_Mono-STYLE.ttf");
+
 
 	window.draw(splashScreenSprite);
 	window.display();
@@ -59,8 +62,8 @@ int main() {
 		if (ticks != 0 && ticks % (FPS_LIMIT * timeBetweenFires) == 0) { // Spawn new fire
 			int x, y;
 			do {
-				x = rand() % (MAP_W - 20) + 10;
-				y = rand() % (MAP_H - 20) + 10;
+				x = rand() % (MAP_W) + 1;
+				y = rand() % (MAP_H) + 1;
 			} while (map[x][y] == FIRE || map[x][y] == WATER);
 			map[x][y] = FIRE;
 		}
@@ -81,8 +84,6 @@ int main() {
 		DrawGUI(window, player.GetMana(), simpleTiles);
 		if (gameOver) {
 			window.draw(gameOverSprite);
-			static sf::Font font;
-			font.loadFromFile("res/C64_Pro_Mono-STYLE.ttf");
 			static sf::Text score;
 			score.setFont(font);
 			score.setString("Your score was: " + std::to_string(player.score/1000));
