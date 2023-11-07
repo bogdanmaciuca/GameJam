@@ -67,7 +67,6 @@ void Player::Update(char map[MAP_W + 2][MAP_H + 2], sf::RenderWindow& window, in
 		mana = std::min(mana + mana_refill, MAX_MANA);
 	player_sprite.setPosition(sf::Vector2f(TILE_SIZE * (x - 1), TILE_SIZE * (y - 1)));
 	window.draw(player_sprite);
-	std::cout << mana_refill << " ";
 }
 
 
