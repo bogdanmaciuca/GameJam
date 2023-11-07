@@ -47,8 +47,11 @@ int main() {
 		if (ticks % 60 == 0)
 			UpdateMap(map, 0, player.water_tiles); // Updates fire
 		if (ticks != 0 && ticks % (FPS_LIMIT * timeBetweenFires) == 0) { // Spawn new fire
-			int x = rand() % (MAP_W - 20) + 10;
-			int y = rand() % (MAP_H - 20) + 10;
+			int x, y;
+			do {
+				x = rand() % (MAP_W - 20) + 10;
+				y = rand() % (MAP_H - 20) + 10;
+			} while (map[x][y] == FIRE || map[x][y] == WATER);
 			map[x][y] = FIRE;
 		}
 		gameOver = false;
